@@ -26,5 +26,5 @@ default['zabbix']['login']  = 'zabbix'
 default['zabbix']['group']  = 'zabbix'
 default['zabbix']['uid']    = nil
 default['zabbix']['gid']    = nil
-default['zabbix']['home']   = '/opt/zabbix'
+default['zabbix']['home']   = '/home/zabbix'
 default['zabbix']['shell']  = '/bin/bash'
