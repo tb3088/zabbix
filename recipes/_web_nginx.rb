@@ -1,18 +1,11 @@
-include_recipe 'zabbix::common'
 
 # Install nginx and disable default site
-node.override['nginx']['default_site_enabled'] = false
+#node.default['nginx']['default_site_enabled'] = false # <<< is just meddling
 # node.override['php-fpm']['pool']['www']['listen'] = node['zabbix']['web']['php']['fastcgi_listen']
 include_recipe 'nginx'
 
 # Install php-fpm to execute PHP code from nginx
 include_recipe 'php-fpm'
-
-node['zabbix']['web']['packages'].each do |pck|
-  package pck do
-    notifies :restart, 'service[nginx]'
-  end
-end
 
 zabbix_source 'extract_zabbix_web' do
   branch node['zabbix']['server']['branch']
@@ -30,6 +23,7 @@ link node['zabbix']['web_dir'] do
   to "#{node['zabbix']['src_dir']}/zabbix-#{node['zabbix']['server']['version']}/frontends/php"
 end
 
+FIXME WTF! at least put this in web and make consistent 'directory' takes care of this path munging
 conf_dir = ::File.join(node['zabbix']['src_dir'], "zabbix-#{node['zabbix']['server']['version']}", 'frontends', 'php', 'conf')
 directory conf_dir do
   owner node['nginx']['user']
@@ -38,6 +32,7 @@ directory conf_dir do
   action :create
 end
 
+FIXME put in web.rb
 # install zabbix PHP config file
 template ::File.join(conf_dir, 'zabbix.conf.php') do
   source 'zabbix_web.conf.php.erb'
@@ -52,6 +47,7 @@ template ::File.join(conf_dir, 'zabbix.conf.php') do
 end
 
 # install host for zabbix
+FIXME /etc/nginx is or should be an attribute, probably :nginx :dir
 template '/etc/nginx/sites-available/zabbix' do
   source 'zabbix_nginx.erb'
   owner 'root'
@@ -71,4 +67,5 @@ php_fpm_pool 'zabbix' do
   listen node['zabbix']['web']['php']['fastcgi_listen']
 end
 
+XXX shouldn't this take a parameter to generate instead of the above template?
 nginx_site 'zabbix'

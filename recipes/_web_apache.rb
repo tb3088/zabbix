@@ -7,7 +7,6 @@
 # Apache 2.0
 #
 
-include_recipe 'zabbix::common'
 include_recipe 'apache2::default'
 include_recipe 'apache2::mod_php5'
 
@@ -67,6 +66,6 @@ web_app node['zabbix']['web']['fqdn'] do
   notifies :restart, 'service[apache2]', :immediately
 end
 
-apache_site '000-default' do
-  enable false
-end
+#apache_site '000-default' do
+#  enable false
+#end

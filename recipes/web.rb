@@ -9,5 +9,5 @@ node['zabbix']['web']['packages'].each do |pkg|
 end
 
 unless node['zabbix']['web']['install_method'].nil?
-  include_recipe "zabbix::web_#{node['zabbix']['web']['install_method']}"
+  include_recipe "zabbix::_web_#{node['zabbix']['web']['install_method']}"
 end
