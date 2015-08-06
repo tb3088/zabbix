@@ -20,5 +20,3 @@
 include_recipe 'chocolatey'
 
 chocolatey 'zabbix-agent'
-
-include_recipe 'zabbix::agent_common'

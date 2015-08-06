@@ -7,11 +7,11 @@
 
 include_recipe 'java'
 
-template '/etc/zabbix/zabbix_java_gateway.conf' do
+template node['zabbix']['etc_dir'] + '/zabbix_java_gateway.conf' do
   source 'zabbix-java-gateway/zabbix_java_gateway.conf.erb'
   variables(
     :java_gateway_listen_ip => node['zabbix']['server']['java_gateway_listen_ip'],
-    :java_gateway_listen_port => node['zabbix']['server']['java_gateway_listen_port'],
+    :java_gateway_listen_port => node['zabbix']['server']['java_gateway_port'],
     :java_gateway_pollers => node['zabbix']['server']['java_gateway_pollers']
   )
   owner 'zabbix'
@@ -20,7 +20,7 @@ template '/etc/zabbix/zabbix_java_gateway.conf' do
   notifies :restart, 'service[zabbix-java-gateway]'
 end
 
-cookbook_file '/etc/zabbix/zabbix_java_gateway.logback.xml' do
+cookbook_file node['zabbix']['etc_dir'] + '/zabbix_java_gateway.logback.xml' do
   source 'zabbix-java-gateway/zabbix_java_gateway.logback.xml'
   owner 'zabbix'
   group 'zabbix'
@@ -52,7 +52,7 @@ service 'zabbix-java-gateway' do
 end
 
 # Dummy file saying look at /etc/zabbix/zabbix_java_gateway.conf
-cookbook_file '/opt/zabbix/sbin/zabbix_java/settings.sh' do
+cookbook_file node['zabbix']['install_dir'] + '/sbin/zabbix_java/settings.sh' do
   source 'zabbix-java-gateway/settings.sh'
   owner 'zabbix'
   group 'zabbix'

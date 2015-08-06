@@ -7,23 +7,17 @@
 # Apache 2.0
 #
 
-include_recipe 'zabbix::common'
+include_recipe 'apache2::default'
+include_recipe 'apache2::mod_php5'
 
 unless node['zabbix']['web']['user']
-  node.normal['zabbix']['web']['user'] = 'apache'
+  node.default['zabbix']['web']['user'] = node['apache']['user']
 end
 
 user node['zabbix']['web']['user']
 
-node['zabbix']['web']['packages'].each do |pkg|
-  package pkg do
-    action :install
-    notifies :restart, 'service[apache2]'
-  end
-end
 
-package 'libapache2-mod-php5' if platform_family?('debian')
-
+if node['zabbix']['server']['install_method'] == 'source'
 zabbix_source 'extract_zabbix_web' do
   branch node['zabbix']['server']['branch']
   version node['zabbix']['server']['version']
@@ -34,17 +28,21 @@ zabbix_source 'extract_zabbix_web' do
   action :extract_only
 end
 
+#FIXME huh?
 link node['zabbix']['web_dir'] do
   to "#{node['zabbix']['src_dir']}/zabbix-#{node['zabbix']['server']['version']}/frontends/php"
 end
 
+#FIXME install in install_dir
 directory "#{node['zabbix']['src_dir']}/zabbix-#{node['zabbix']['server']['version']}/frontends/php/conf" do
   owner node['apache']['user']
   group node['apache']['group']
   mode '0755'
   action :create
 end
+end
 
+#FIXME install in install_dir
 # install zabbix PHP config file
 template "#{node['zabbix']['src_dir']}/zabbix-#{node['zabbix']['server']['version']}/frontends/php/conf/zabbix.conf.php" do
   source 'zabbix_web.conf.php.erb'
@@ -68,6 +66,6 @@ web_app node['zabbix']['web']['fqdn'] do
   notifies :restart, 'service[apache2]', :immediately
 end
 
-apache_site '000-default' do
-  enable false
-end
+#apache_site '000-default' do
+#  enable false
+#end

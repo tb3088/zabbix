@@ -7,9 +7,6 @@
 # Apache 2.0
 #
 
-include_recipe 'zabbix::common'
-include_recipe 'zabbix::server_common'
-
 configure_options = node['zabbix']['server']['configure_options'].dup
 configure_options = (configure_options || Array.new).delete_if do |option|
   option.match(/\s*--prefix(\s|=).+/)

@@ -25,7 +25,7 @@ if node['zabbix']['server']['install'] == true
     zabbix_clients.each do |client|
       # Accept connection from zabbix_server on agent
       firewall_rule "zabbix_client_#{client[:fqdn]}" do
-        port 10_051
+        port node['zabbix']['agent']['port']
         source client[:ipaddress]
         action :allow
       end
@@ -33,7 +33,7 @@ if node['zabbix']['server']['install'] == true
 
     # Localhost too
     firewall_rule 'zabbix_client_127.0.0.1}' do
-      port 10_051
+      port node['zabbix']['agent']['port']
       source '127.0.0.1'
       action :allow
     end
@@ -49,14 +49,9 @@ else
 
     # Accept connection from zabbix_agent on server
     firewall_rule "zabbix_server_#{server[:fqdn]}" do
-      port 10_050
+      port node['zabbix']['server']['port']
       source server[:ipaddress]
       action :allow
     end
   end if zabbix_servers
-end
-
-# enable platform default firewall
-firewall 'ufw' do
-  action :enable
 end

@@ -13,7 +13,7 @@ default['zabbix']['agent']['hostname']          = node['fqdn']
 default['zabbix']['agent']['configure_options'] = ['--with-libcurl']
 default['zabbix']['agent']['include_dir']       = ::File.join(node['zabbix']['etc_dir'], 'agent_include')
 default['zabbix']['agent']['enable_remote_commands'] = true
-default['zabbix']['agent']['listen_port']       = '10050'
+default['zabbix']['agent']['port']              = '10050'
 default['zabbix']['agent']['timeout']       	= '3'
 
 default['zabbix']['agent']['config_file']               = ::File.join(node['zabbix']['etc_dir'], 'zabbix_agentd.conf')
@@ -43,7 +43,6 @@ default['zabbix']['agent']['debug_level']        = nil # default (3)
 default['zabbix']['agent']['templates']          = []
 default['zabbix']['agent']['interfaces']         = ['zabbix_agent']
 default['zabbix']['agent']['jmx_port']           = '10052'
-default['zabbix']['agent']['zabbix_agent_port']  = '10050'
 default['zabbix']['agent']['snmp_port']          = '161'
 
 default['zabbix']['agent']['user_parameter'] = []
