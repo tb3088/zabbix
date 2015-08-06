@@ -6,6 +6,7 @@
 
 NAME=zabbix_server
 DAEMON=<%= node.zabbix.install_dir %>/sbin/${NAME}
+OPTS="-c <%= node.zabbix.server.config_file %>
 DESC="Zabbix server daemon"
 DIR=<%= node.zabbix.run_dir %>
 PID=<%= node.zabbix.server.pid_file %>
@@ -21,7 +22,7 @@ case "$1" in
   start)
         echo "Starting $DESC: $NAME"
         start-stop-daemon --oknodo --start --pidfile $PID \
-                --exec $DAEMON -- -c <%= node.zabbix.server.config_file %>
+                --exec $DAEMON -- $OPTS
         ;;
   stop)
         echo "Stopping $DESC: $NAME"
