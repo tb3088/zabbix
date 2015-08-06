@@ -1,5 +1,6 @@
-include_recipe "zabbix::agent_#{node['zabbix']['agent']['install_method']}"
+include_recipe 'zabbix'
 include_recipe 'zabbix::agent_common'
+include_recipe "zabbix::_agent_#{node['zabbix']['agent']['install_method']}"
 
 # Install configuration
 template 'zabbix_agentd.conf' do
