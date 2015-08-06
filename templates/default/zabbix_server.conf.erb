@@ -25,7 +25,7 @@ JavaGatewayPort=<%= @java_gateway_port %>
 StartJavaPollers=<%= @java_pollers %>
 StartPollers=<%= node['zabbix']['server']['start_pollers']%>
 
-ExternalScripts=<%= node['zabbix']['server']['externalscriptspath'] %>
+ExternalScripts=<%= node['zabbix']['server']['external_dir'] %>
 Timeout=<%= node['zabbix']['server']['timeout']%>
 ValueCacheSize=<%= node['zabbix']['server']['value_cache_size'] %>
 CacheSize=<%= node['zabbix']['server']['cache_size'] %>
