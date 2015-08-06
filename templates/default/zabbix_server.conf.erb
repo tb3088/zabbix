@@ -13,7 +13,7 @@ DBPassword=<%= @dbpassword %>
 DBPort=<%= @dbport %>
 
 DebugLevel=<%= node['zabbix']['server']['log_level'] %>
-PidFile=<%= node['zabbix']['run_dir'] %>/zabbix_server.pid
+PidFile=<%= node['zabbix']['server']['pid_file'] %>
 Include=<%= node['zabbix']['server']['include_dir'] %>
 AlertScriptsPath=<%= node['zabbix']['alert_dir'] %>
 

@@ -8,7 +8,7 @@ NAME=zabbix_server
 DAEMON=<%= node.zabbix.install_dir %>/sbin/${NAME}
 DESC="Zabbix server daemon"
 DIR=<%= node.zabbix.run_dir %>
-PID=<%= node.zabbix.run_dir %>/$NAME.pid
+PID=<%= node.zabbix.server.pid_file %>
 
 . /lib/lsb/init-functions
 
@@ -21,7 +21,7 @@ case "$1" in
   start)
         echo "Starting $DESC: $NAME"
         start-stop-daemon --oknodo --start --pidfile $PID \
-                --exec $DAEMON -- -c <%= node.zabbix.etc_dir %>/zabbix_server.conf
+                --exec $DAEMON -- -c <%= node.zabbix.server.config_file %>
         ;;
   stop)
         echo "Stopping $DESC: $NAME"

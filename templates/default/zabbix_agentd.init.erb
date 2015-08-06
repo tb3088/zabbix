@@ -62,15 +62,15 @@ case "$1" in
 	;;
   status)
                 if [ -f "$PID" ]; then
-                        echo "zabbix_agentd is running (pid $PID)."  
+                        echo "$NAME is running (pid $PID)."  
                         PIDVALID=$(ps --pid `cat $PID` -o pid=)               
                         if [ $PIDVALID ]; then
                             exit 0
                         else
-                          echo "pid file exist but zabbix_agentd is NOT running."   
+                          echo "pid file exist but $NAME is NOT running."   
                         fi   
                 else
-                        echo "zabbix_agentd is NOT running."
+                        echo "$NAME is NOT running."
                         exit 1
                 fi
         ;;
