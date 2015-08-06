@@ -11,7 +11,6 @@ include_recipe 'zabbix::common'
 include_recipe 'apache2::default'
 include_recipe 'apache2::mod_php5'
 
-
 unless node['zabbix']['web']['user']
   node.default['zabbix']['web']['user'] = node['apache']['user']
 end

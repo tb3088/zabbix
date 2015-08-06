@@ -17,7 +17,7 @@ if node['zabbix']['login']
   # Create zabbix User
   user node['zabbix']['login'] do
     comment 'zabbix User'
-    home node['zabbix']['install_dir']
+    home node['zabbix']['home']
     shell node['zabbix']['shell']
     uid node['zabbix']['uid']
     gid node['zabbix']['gid']
