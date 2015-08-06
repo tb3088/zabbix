@@ -1,5 +1,5 @@
 
-include_recipe "php::"
+include_recipe "php::default"
 
 node['zabbix']['web']['packages'].each do |pkg|
   package pkg do

@@ -8,7 +8,7 @@
 #
 
 include_recipe 'zabbix::common'
-include_recipe 'apache2::'
+include_recipe 'apache2::default'
 include_recipe 'apache2::mod_php5'
 
 
