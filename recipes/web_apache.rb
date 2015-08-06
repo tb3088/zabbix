@@ -9,10 +9,6 @@
 
 include_recipe 'zabbix::common'
 
-directory node['zabbix']['install_dir'] do
-  mode '0755'
-end
-
 unless node['zabbix']['web']['user']
   node.normal['zabbix']['web']['user'] = 'apache'
 end

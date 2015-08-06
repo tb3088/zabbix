@@ -10,6 +10,7 @@
 # Define root owned folders
 root_dirs = [
   node['zabbix']['etc_dir'],
+  node['zabbix']['install_dir']
 ]
 
 # Create root folders
