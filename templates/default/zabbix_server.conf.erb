@@ -13,7 +13,7 @@ DBPassword=<%= @dbpassword %>
 DBPort=<%= @dbport %>
 
 DebugLevel=<%= node['zabbix']['server']['log_level'] %>
-PidFile=<%= node['zabbix']['run_dir'] %>/zabbix_server.pid
+PidFile=<%= node['zabbix']['server']['pid_file'] %>
 Include=<%= node['zabbix']['server']['include_dir'] %>
 AlertScriptsPath=<%= node['zabbix']['alert_dir'] %>
 
@@ -25,7 +25,7 @@ JavaGatewayPort=<%= @java_gateway_port %>
 StartJavaPollers=<%= @java_pollers %>
 StartPollers=<%= node['zabbix']['server']['start_pollers']%>
 
-ExternalScripts=<%= node['zabbix']['server']['externalscriptspath'] %>
+ExternalScripts=<%= node['zabbix']['server']['external_dir'] %>
 Timeout=<%= node['zabbix']['server']['timeout']%>
 ValueCacheSize=<%= node['zabbix']['server']['value_cache_size'] %>
 CacheSize=<%= node['zabbix']['server']['cache_size'] %>

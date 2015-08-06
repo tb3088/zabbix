@@ -6,6 +6,8 @@ default['zabbix']['server']['source_url']             = nil
 default['zabbix']['server']['install_method']         = 'source'
 default['zabbix']['server']['configure_options']      = ['--with-libcurl', '--with-net-snmp']
 default['zabbix']['server']['include_dir']            = '/opt/zabbix/server_include'
+default['zabbix']['server']['config_file']            = ::File.join(node['zabbix']['etc_dir'], 'zabbix_server.conf')
+default['zabbix']['server']['pid_file']               = ::File.join(node['zabbix']['run_dir'], 'zabbix_server.pid')
 default['zabbix']['server']['log_file']               = ::File.join(node['zabbix']['log_dir'], 'zabbix_server.log')
 default['zabbix']['server']['log_level']              = 3
 default['zabbix']['server']['housekeeping_frequency'] = '1'
@@ -19,8 +21,6 @@ default['zabbix']['server']['java_gateway'] = '127.0.0.1'
 default['zabbix']['server']['java_gateway_port'] = 10_052
 default['zabbix']['server']['java_pollers'] = 0
 default['zabbix']['server']['start_pollers'] = 5
-
-default['zabbix']['server']['externalscriptspath'] = '/usr/local/scripts/zabbix/externalscripts/'
 
 default['zabbix']['server']['timeout'] = '3'
 default['zabbix']['server']['value_cache_size'] = '8M' # default 8MB
