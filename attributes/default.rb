@@ -14,9 +14,9 @@ else
   default['zabbix']['etc_dir']      = '/etc/zabbix'
 end
 default['zabbix']['install_dir']  = '/opt/zabbix'
-default['zabbix']['web_dir']      = '/opt/zabbix/web'
-default['zabbix']['external_dir'] = '/opt/zabbix/externalscripts'
-default['zabbix']['alert_dir']    = '/opt/zabbix/AlertScriptsPath'
+default['zabbix']['web_dir']      = node['zabbix']['install_dir'] + '/web'
+default['zabbix']['external_dir'] = node['zabbix']['install_dir'] + '/externalscripts'
+default['zabbix']['alert_dir']    = node['zabbix']['install_dir'] + '/alertscripts'
 default['zabbix']['lock_dir']     = '/var/lock/subsys'
 default['zabbix']['src_dir']      = '/tmp'
 default['zabbix']['log_dir']      = '/var/log/zabbix'
